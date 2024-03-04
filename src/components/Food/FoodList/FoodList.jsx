@@ -1,36 +1,20 @@
+import { useFetch } from "../../../hooks/useFetch";
 import { fetchMeals } from "../../../http";
-import { useState, useEffect, useContext } from "react";
+
+import { useContext } from "react";
 import { foodContext } from "../../../store/food-context";
+
 import FoodItem from "./FoodItem/FoodItem";
 
 export default function FoodList() {
   const { addItemToCart } = useContext(foodContext);
+  const { data: meals, error, isFetching } = useFetch(fetchMeals, []);
 
-  const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const mealsData = await fetchMeals();
-        setMeals(mealsData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  if (isLoading) return <p>Loading data . . .</p>;
+  if (isFetching) return <p>Loading data . . .</p>;
 
   if (error) return <p>Error! {error}</p>;
 
-  console.log("FoodList");
-
+  //console.log("FoodList");
   return (
     <>
       <section

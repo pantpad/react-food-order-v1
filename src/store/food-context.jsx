@@ -9,7 +9,7 @@ export const foodContext = createContext({
 
 export default function FoodContextProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [meals, setMeals] = useState([]);
+  //const [meals, setMeals] = useState([]);
   const [orders, setOrders] = useState([]);
 
   function createCartItem(meal) {
