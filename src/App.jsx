@@ -1,10 +1,13 @@
 import Header from "./components/Header/Header";
+import PageLayout from "./layout/PageLayout";
 
 function App() {
   return (
     <>
-      <Header></Header>
-      <h1>Food Order App</h1>
+      <PageLayout>
+        <Header></Header>
+        <h1>Food Order App</h1>
+      </PageLayout>
     </>
   );
 }
