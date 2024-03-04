@@ -1,6 +1,9 @@
 import Header from "./components/Header/Header";
 import PageLayout from "./layout/PageLayout";
 import FoodList from "./components/Food/FoodList/FoodList";
+import ModalContextProvider from "./store/modal-context";
+import Modal from "./components/Modal/Modal";
+
 import { useState } from "react";
 
 function App() {
@@ -17,10 +20,13 @@ function App() {
 
     setCart((prev) => [...prev, cartItem]);
   }
-
+  //console.log("App");
   return (
     <>
-      <Header cart={cart} />
+      <ModalContextProvider>
+        <Modal></Modal>
+        <Header cart={cart} />
+      </ModalContextProvider>
       <PageLayout className={"w-[min(65rem,100vw-4rem)]"}>
         <FoodList onAdd={addToCart} />
       </PageLayout>

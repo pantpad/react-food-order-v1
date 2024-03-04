@@ -6,6 +6,8 @@ export default function FoodItem({
   image,
   onAdd,
 }) {
+  //console.log("FoodItem");
+
   return (
     <>
       <article className="bg-black/30">

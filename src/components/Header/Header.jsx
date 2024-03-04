@@ -1,24 +1,13 @@
-import { useState } from "react";
-import Modal from "../Modal/Modal";
 import Cart from "../Cart/Cart";
+import CartHistory from "../Cart/CartHistory";
+
+import { modalContext } from "../../store/modal-context";
+import { useContext } from "react";
 
 export default function Header({ cart }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentView, setCurrentView] = useState(null);
+  const { openModal } = useContext(modalContext);
 
-  function handleModalOpening(view) {
-    openModal();
-    setCurrentView(view);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+  //console.log("Header");
   return (
     <>
       <header className="flex w-full items-center justify-between px-8 py-4">
@@ -36,24 +25,21 @@ export default function Header({ cart }) {
           <ul className="flex gap-4 [&>*]:cursor-pointer">
             <li
               onClick={() => {
-                handleModalOpening("history");
+                openModal(<CartHistory cart={cart} />);
               }}
             >
               Order History
             </li>
             <li
               onClick={() => {
-                handleModalOpening(<Cart cart={cart} />);
+                openModal(<Cart cart={cart} />);
               }}
             >
-              Cart - (n)
+              Cart - ({cart.length})
             </li>
           </ul>
         </nav>
       </header>
-      <Modal open={isOpen} closeModal={closeModal}>
-        {currentView}
-      </Modal>
     </>
   );
 }

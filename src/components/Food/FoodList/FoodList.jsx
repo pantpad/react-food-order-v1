@@ -27,6 +27,8 @@ export default function FoodList({ onAdd }) {
 
   if (error) return <p>Error! {error}</p>;
 
+  //console.log("FoodList");
+
   return (
     <>
       <section
