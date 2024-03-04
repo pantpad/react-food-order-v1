@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import FoodItem from "./FoodItem/FoodItem";
 
-export default function FoodList() {
+export default function FoodList({ onAdd }) {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,13 +34,7 @@ export default function FoodList() {
         className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4"
       >
         {meals.map((meal) => (
-          <FoodItem
-            key={meal.id}
-            {...meal}
-            onAdd={() => {
-              console.log(meal);
-            }}
-          />
+          <FoodItem key={meal.id} {...meal} onAdd={() => onAdd(meal)} />
         ))}
       </section>
     </>
