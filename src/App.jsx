@@ -27,7 +27,7 @@ function App() {
         <Modal></Modal>
         <Header cart={cart} />
       </ModalContextProvider>
-      <PageLayout className={"w-[min(65rem,100vw-4rem)]"}>
+      <PageLayout className={"w-[min(60rem,100vw-4rem)]"}>
         <FoodList onAdd={addToCart} />
       </PageLayout>
     </>
