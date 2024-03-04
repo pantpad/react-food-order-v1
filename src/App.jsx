@@ -6,8 +6,16 @@ import { useState } from "react";
 function App() {
   const [cart, setCart] = useState([]);
 
-  function addToCart(item) {
-    setCart((prev) => [...prev, item]);
+  function addToCart(meal) {
+    //creazione cartItem
+    const cartItem = {
+      id: meal.id,
+      name: meal.name,
+      price: meal.price,
+      quantity: 1,
+    };
+
+    setCart((prev) => [...prev, cartItem]);
   }
 
   return (

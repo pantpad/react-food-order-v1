@@ -4,7 +4,12 @@ export default function Cart({ cart }) {
     <>
       <h1>CART</h1>
       {cart.map((item) => (
-        <p key={item.id}>{item.name}</p>
+        <article key={item.id} className="flex gap-2">
+          <p>{item.name}</p>
+          <p>${item.price}</p>
+          <p>{item.quantity}</p>
+          <p>${item.price * item.quantity}</p>
+        </article>
       ))}
     </>
   );
