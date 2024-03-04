@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "o1",
+    "meals": [
+      {
+        "id": "m1",
+        "name": "Mac & Cheese",
+        "price": "8.99",
+        "quantity": "1"
+      }
+    ],
+    "total": "8.99",
+    "date": "today"
+  }
+]

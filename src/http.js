@@ -7,5 +7,6 @@ export async function fetchMeals() {
 export async function fetchOrders() {
   const resp = await fetch("http://localhost:3000/orders");
   const data = await resp.json();
+
   return data;
 }
