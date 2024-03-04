@@ -13,7 +13,8 @@ export default function Header() {
           <h2>REACT-FOOD</h2>
         </section>
         <nav>
-          <ul>
+          <ul className="flex gap-4">
+            <li>Order History</li>
             <li>Cart - (n)</li>
           </ul>
         </nav>
