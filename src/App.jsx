@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <PageLayout className={"w-[min(65rem,100vw-4rem)] border border-red-100"}>
+      <PageLayout className={"w-[min(65rem,100vw-4rem)]"}>
         <FoodList />
       </PageLayout>
     </>

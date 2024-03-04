@@ -34,7 +34,13 @@ export default function FoodList() {
         className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4"
       >
         {meals.map((meal) => (
-          <FoodItem key={meal.id} {...meal} />
+          <FoodItem
+            key={meal.id}
+            {...meal}
+            onAdd={() => {
+              console.log(meal);
+            }}
+          />
         ))}
       </section>
     </>
