@@ -1,11 +1,14 @@
 import Cart from "../Cart/Cart";
 import CartHistory from "../Cart/CartHistory";
 
-import { modalContext } from "../../store/modal-context";
 import { useContext } from "react";
 
-export default function Header({ cart }) {
+import { modalContext } from "../../store/modal-context";
+import { foodContext } from "../../store/food-context";
+
+export default function Header() {
   const { openModal } = useContext(modalContext);
+  const { cart } = useContext(foodContext);
 
   //console.log("Header");
   return (
@@ -25,14 +28,14 @@ export default function Header({ cart }) {
           <ul className="flex gap-4 [&>*]:cursor-pointer">
             <li
               onClick={() => {
-                openModal(<CartHistory cart={cart} />);
+                openModal(<CartHistory />);
               }}
             >
               Order History
             </li>
             <li
               onClick={() => {
-                openModal(<Cart cart={cart} />);
+                openModal(<Cart />);
               }}
             >
               Cart - ({cart.length})

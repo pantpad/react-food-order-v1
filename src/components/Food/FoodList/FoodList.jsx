@@ -1,9 +1,11 @@
 import { fetchMeals } from "../../../http";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import { foodContext } from "../../../store/food-context";
 import FoodItem from "./FoodItem/FoodItem";
 
-export default function FoodList({ onAdd }) {
+export default function FoodList() {
+  const { addItemToCart } = useContext(foodContext);
+
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,7 +29,7 @@ export default function FoodList({ onAdd }) {
 
   if (error) return <p>Error! {error}</p>;
 
-  //console.log("FoodList");
+  console.log("FoodList");
 
   return (
     <>
@@ -36,7 +38,7 @@ export default function FoodList({ onAdd }) {
         className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4"
       >
         {meals.map((meal) => (
-          <FoodItem key={meal.id} {...meal} onAdd={() => onAdd(meal)} />
+          <FoodItem key={meal.id} {...meal} onAdd={() => addItemToCart(meal)} />
         ))}
       </section>
     </>

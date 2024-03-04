@@ -1,8 +1,12 @@
 import { useContext } from "react";
+
 import { modalContext } from "../../store/modal-context";
-export default function Cart({ cart }) {
+import { foodContext } from "../../store/food-context";
+
+export default function Cart() {
   const { changeView, closeModal } = useContext(modalContext);
-  const isCartEmpty = cart.length < 1;
+  const { cart, isCartEmpty } = useContext(foodContext);
+  console.log(isCartEmpty);
 
   //console.log("Cart");
   return (
