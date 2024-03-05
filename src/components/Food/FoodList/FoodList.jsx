@@ -12,7 +12,7 @@ export default function FoodList() {
 
   if (isFetching) return <p>Loading data . . .</p>;
 
-  if (error) return <p>Error! {error}</p>;
+  if (error) return <p>{error.message} meals</p>;
 
   //console.log("FoodList");
   return (

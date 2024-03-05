@@ -11,8 +11,9 @@ export function useFetch(fetchFunction, initValue) {
         setIsFetching(true);
         const data = await fetchFunction();
         setData(data);
-      } catch (error) {
-        setError(error);
+      } catch (err) {
+        console.log(err);
+        setError(err);
       } finally {
         setIsFetching(false);
       }
