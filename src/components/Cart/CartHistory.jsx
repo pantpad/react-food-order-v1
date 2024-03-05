@@ -7,10 +7,17 @@ import { fetchOrders } from "../../http";
 export default function CartHistory() {
   const { closeModal } = useContext(modalContext);
   const { data: orders, error, isFetching } = useFetch(fetchOrders, []);
-  //console.log("CartHistory");
   if (isFetching) return <p>Loading data . . .</p>;
 
-  if (error) return <p>Error! {error}</p>;
+  if (error)
+    return (
+      <>
+        <p>{error.message} history</p>
+        <button onClick={closeModal}>Close</button>
+      </>
+    );
+
+  //console.log("CartHistory");
   console.log(orders);
   return (
     <>
