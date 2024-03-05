@@ -6,6 +6,8 @@ export const foodContext = createContext({
   isCartEmpty: null,
   addItemToCart: () => {},
   cartLength: null,
+  increaseItemQuantity: () => {},
+  decreaseItemQuantity: () => {},
 });
 
 export default function FoodContextProvider({ children }) {
@@ -56,12 +58,41 @@ export default function FoodContextProvider({ children }) {
     }
   }
 
+  function increaseItemQuantity(meal) {
+    const itemIndex = findItemIndex(meal.id);
+    const mealToUpdate = {
+      ...cart[itemIndex],
+      quantity: cart[itemIndex].quantity + 1,
+    };
+    const updatedItems = [...cart];
+    updatedItems[itemIndex] = mealToUpdate;
+    setCart(updatedItems);
+  }
+  function decreaseItemQuantity(meal) {
+    const itemIndex = findItemIndex(meal.id);
+    const mealToUpdate = {
+      ...cart[itemIndex],
+      quantity: cart[itemIndex].quantity - 1,
+    };
+    const updatedItems = [...cart];
+    console.log(mealToUpdate.quantity);
+    if (mealToUpdate.quantity < 1) {
+      updatedItems.splice(itemIndex, 1);
+    } else {
+      updatedItems[itemIndex] = mealToUpdate;
+    }
+
+    setCart(updatedItems);
+  }
+
   const foodCtx = {
     cart: cart,
     orders: orders,
     addItemToCart: addItemToCart,
     isCartEmpty: cart.length < 1,
     cartLength: getCartLength(),
+    increaseItemQuantity,
+    decreaseItemQuantity,
   };
   return (
     <foodContext.Provider value={foodCtx}>{children}</foodContext.Provider>

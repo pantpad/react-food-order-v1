@@ -5,8 +5,8 @@ import { foodContext } from "../../store/food-context";
 
 export default function Cart() {
   const { changeView, closeModal } = useContext(modalContext);
-  const { cart, isCartEmpty } = useContext(foodContext);
-  console.log(isCartEmpty);
+  const { cart, isCartEmpty, increaseItemQuantity, decreaseItemQuantity } =
+    useContext(foodContext);
 
   //console.log("Cart");
   return (
@@ -16,11 +16,29 @@ export default function Cart() {
         <p>Cart is EMPTY</p>
       ) : (
         cart.map((item) => (
-          <article key={item.id} className="flex gap-2">
-            <p>{item.name}</p>
-            <p>${item.price}</p>
-            <p>{item.quantity}</p>
-            <p>${item.price * item.quantity}</p>
+          <article key={item.id} className="flex items-center justify-between">
+            <div className="flex gap-2">
+              <p>{item.name}</p>
+              <p>${item.price}</p>
+              <p>{item.quantity}</p>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <button
+                onClick={() => {
+                  decreaseItemQuantity(item);
+                }}
+                className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white/35 bg-yellow-950 text-white"
+              >
+                -
+              </button>
+              <p>${item.price * item.quantity}</p>
+              <button
+                onClick={() => increaseItemQuantity(item)}
+                className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white/35 bg-yellow-950 text-white"
+              >
+                +
+              </button>
+            </div>
           </article>
         ))
       )}
