@@ -14,7 +14,7 @@ export const foodContext = createContext({
 export default function FoodContextProvider({ children }) {
   const [cart, setCart] = useState([]);
   //const [meals, setMeals] = useState([]);
-  const [orders, setOrders] = useState([]);
+  //const [orders, setOrders] = useState([]);
 
   function createCartItem(meal) {
     return {
@@ -95,7 +95,6 @@ export default function FoodContextProvider({ children }) {
 
   const foodCtx = {
     cart: cart,
-    orders: orders,
     addItemToCart: addItemToCart,
     isCartEmpty: cart.length < 1,
     cartLength: getCartLength(),

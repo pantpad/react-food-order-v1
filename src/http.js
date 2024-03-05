@@ -20,3 +20,18 @@ export async function fetchOrders() {
 
   return data;
 }
+
+export async function updateOrders(order) {
+  const resp = await fetch("http://localhost:3000/orders", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ order }),
+  });
+
+  if (!resp.ok) {
+    throw new Error("Failed to update orders :(");
+  }
+
+  const data = await resp.json();
+  return data;
+}

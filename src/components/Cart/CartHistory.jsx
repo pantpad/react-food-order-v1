@@ -25,30 +25,32 @@ export default function CartHistory() {
       {orders.map((order) => (
         <OrderItem key={order.id} {...order} />
       ))}
-      <button onClick={closeModal}>Close</button>
+      <button
+        onClick={closeModal}
+        className="float-end mt-2 rounded-md bg-red-300 p-2"
+      >
+        Close
+      </button>
     </>
   );
 }
 
-function OrderItem({ total, date }) {
+function OrderItem({ customer, items, timeStamp }) {
   return (
     <>
-      <p>total: {total}</p>
-      <p>date: {date}</p>
+      <article className="mb-2 border border-white/35 p-4">
+        <section className="mb-4 mt-4 flex flex-col gap-2">
+          {items.map((item) => (
+            <>
+              <p>{item.name}</p>
+              <p>{item.price}</p>
+              <p>{item.quantity}</p>
+            </>
+          ))}
+        </section>
+        <p>who? {customer.fullName}</p>
+        <p>timeStamp: {timeStamp}</p>
+      </article>
     </>
   );
 }
-
-// {
-//   "id": "o1",
-//   "meals": [
-//     {
-//       "id": "m1",
-//       "name": "Mac & Cheese",
-//       "price": "8.99",
-//       "quantity": "1"
-//     }
-//   ],
-//   "total": "8.99",
-//   "date": "today"
-// }
