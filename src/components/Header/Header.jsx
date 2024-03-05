@@ -8,7 +8,7 @@ import { foodContext } from "../../store/food-context";
 
 export default function Header() {
   const { openModal } = useContext(modalContext);
-  const { cart } = useContext(foodContext);
+  const { cartLength } = useContext(foodContext);
 
   //console.log("Header");
   return (
@@ -38,7 +38,7 @@ export default function Header() {
                 openModal(<Cart />);
               }}
             >
-              Cart - ({cart.length})
+              Cart - ({cartLength})
             </li>
           </ul>
         </nav>

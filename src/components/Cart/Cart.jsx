@@ -24,17 +24,17 @@ export default function Cart() {
           </article>
         ))
       )}
-      <button
-        onClick={() => {
-          if (isCartEmpty) {
-            closeModal();
-          } else {
+      <div className="mt-2 flex justify-end gap-2 [&_button]:rounded-md [&_button]:border [&_button]:border-black/25 [&_button]:p-2">
+        <button onClick={closeModal}>Close</button>
+        <button
+          onClick={() => {
             changeView(<p>CHECKOUT</p>);
-          }
-        }}
-      >
-        {isCartEmpty ? "Close" : "Go To Checkout"}
-      </button>
+          }}
+          className={`${isCartEmpty ? "hidden " : ""} bg-amber-300`}
+        >
+          Go To Checkout
+        </button>
+      </div>
     </>
   );
 }
