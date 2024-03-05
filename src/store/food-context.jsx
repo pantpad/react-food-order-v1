@@ -10,8 +10,6 @@ export const foodContext = createContext({
 
 export default function FoodContextProvider({ children }) {
   const [cart, setCart] = useState([]);
-  //loop degli elementi nel carrello
-  //se trovo item con stesso ID -> aumento la quantity e ritorno previtems
   //const [meals, setMeals] = useState([]);
   const [orders, setOrders] = useState([]);
 
