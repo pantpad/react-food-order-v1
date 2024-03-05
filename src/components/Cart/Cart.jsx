@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { modalContext } from "../../store/modal-context";
 import { foodContext } from "../../store/food-context";
 
+import CartCheckout from "./CartCheckout";
+
 export default function Cart() {
   const { changeView, closeModal } = useContext(modalContext);
   const { cart, isCartEmpty, increaseItemQuantity, decreaseItemQuantity } =
@@ -46,7 +48,7 @@ export default function Cart() {
         <button onClick={closeModal}>Close</button>
         <button
           onClick={() => {
-            changeView(<p>CHECKOUT</p>);
+            changeView(<CartCheckout />);
           }}
           className={`${isCartEmpty ? "hidden " : ""} bg-amber-300`}
         >
