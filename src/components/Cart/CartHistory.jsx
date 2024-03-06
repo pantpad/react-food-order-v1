@@ -4,6 +4,8 @@ import { modalContext } from "../../store/modal-context";
 import { useFetch } from "../../hooks/useFetch";
 import { fetchOrders } from "../../http";
 
+import { formatEUDate } from "../../utils/dateFormatter";
+
 export default function CartHistory() {
   const { closeModal } = useContext(modalContext);
   const { data: orders, error, isFetching } = useFetch(fetchOrders, []);
@@ -48,7 +50,7 @@ function OrderItem({ customer, items, timeStamp }) {
           ))}
         </section>
         <p>who? {customer.fullName}</p>
-        <p>timeStamp: {timeStamp}</p>
+        <p>timeStamp: {formatEUDate(timeStamp)}</p>
       </article>
     </>
   );
