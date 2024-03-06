@@ -34,7 +34,6 @@ app.get("/orders", async (req, res) => {
 });
 
 app.post("/orders", async (req, res) => {
-  console.log(req.body);
   const orderData = req.body.order;
   console.log(orderData);
   // if (

@@ -6,6 +6,7 @@ import { foodContext } from "../../store/food-context";
 import { updateOrders } from "../../http";
 
 import Cart from "./Cart";
+import CartSuccess from "./CartSuccess";
 
 function createOrder(cart, formData) {
   return {
@@ -16,7 +17,7 @@ function createOrder(cart, formData) {
 }
 
 export default function CartCheckout() {
-  const { cartTotal, cart } = useContext(foodContext);
+  const { cart, cartTotal, clearCart } = useContext(foodContext);
   const { changeView, closeModal } = useContext(modalContext);
   return (
     <>
@@ -33,9 +34,12 @@ export default function CartCheckout() {
           async function postData() {
             try {
               await updateOrders(order);
+              console.log("success");
+              clearCart();
+              changeView(<CartSuccess />);
             } catch (err) {
               console.log(err);
-              console.log("error");
+              alert(err);
             } finally {
               console.log("finito");
             }

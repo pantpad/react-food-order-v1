@@ -9,6 +9,7 @@ export const foodContext = createContext({
   cartTotal: null,
   increaseItemQuantity: () => {},
   decreaseItemQuantity: () => {},
+  clearCart: () => {},
 });
 
 export default function FoodContextProvider({ children }) {
@@ -93,6 +94,10 @@ export default function FoodContextProvider({ children }) {
     setCart(updatedItems);
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   const foodCtx = {
     cart: cart,
     addItemToCart: addItemToCart,
@@ -101,6 +106,7 @@ export default function FoodContextProvider({ children }) {
     cartTotal: getCartTotal(),
     increaseItemQuantity,
     decreaseItemQuantity,
+    clearCart,
   };
   return (
     <foodContext.Provider value={foodCtx}>{children}</foodContext.Provider>
