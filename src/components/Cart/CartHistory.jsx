@@ -47,8 +47,8 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
   return (
     <>
       <article className="relative">
-        <details className="mb-2 rounded-md [&_summary]:open:rounded-b-none">
-          <summary className="flex cursor-pointer flex-wrap justify-between gap-8 rounded-md border border-black/35 bg-slate-500/90 p-4 text-sm text-white">
+        <details className="group mb-2 rounded-md [&_summary]:open:rounded-b-none">
+          <summary className="flex cursor-pointer flex-wrap  justify-between gap-8 rounded-md border border-black/35 bg-slate-500/90 p-4 text-sm text-white transition-all">
             <section className="flex justify-between gap-2 text-left">
               <div className="flex flex-col">
                 <label>Order done on:</label>
@@ -56,7 +56,7 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
               </div>
               <div className="flex flex-col">
                 <label>Total:</label>
-                <p>${cartTotal}</p>
+                <p className="font-bold">${cartTotal}</p>
               </div>
               <div className="flex flex-col">
                 <label>Send to:</label>
@@ -74,7 +74,7 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
               </div>
             </section>
           </summary>
-          <section className="rounded-b-md border border-t-0 border-black/35 bg-slate-500/50 p-4">
+          <section className="rounded-b-md border border-t-0 border-black/35 bg-slate-500/50 p-4 group-open:animate-[fade-in_0.3s_ease-out_forwards]">
             {items.map((item) => (
               <ItemDetails key={item.id} {...item} />
             ))}
@@ -88,11 +88,11 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
 function ItemDetails({ name, price, quantity }) {
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="mb-2 grid grid-cols-[3fr,1fr] gap-4 border-b border-black/30 text-black/90">
         <p>
           {name} - ${price}
         </p>
-        <p className="w-[100px] justify-self-end">
+        <p>
           {quantity} - ${price * quantity}
         </p>
       </div>
