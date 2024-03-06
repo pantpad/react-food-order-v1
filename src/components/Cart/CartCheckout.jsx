@@ -8,11 +8,12 @@ import { updateOrders } from "../../http";
 import Cart from "./Cart";
 import CartSuccess from "./CartSuccess";
 
-function createOrder(cart, formData) {
+function createOrder(cart, formData, cartTotal) {
   return {
     items: [...cart],
     customer: { ...formData },
     timeStamp: Date.now(),
+    cartTotal,
   };
 }
 
@@ -28,7 +29,7 @@ export default function CartCheckout() {
           const formData = new FormData(e.target);
           const data = Object.fromEntries(formData);
 
-          const order = createOrder(cart, data);
+          const order = createOrder(cart, data, cartTotal);
 
           async function postData() {
             try {

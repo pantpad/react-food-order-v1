@@ -19,7 +19,7 @@ export default function Modal() {
     <>
       <dialog
         ref={dialog}
-        className="fixed inset-0 min-h-[480px] min-w-[320px] rounded-md bg-slate-300 p-4 backdrop:bg-black/50"
+        className="fixed inset-0 min-h-[480px] min-w-[300px] rounded-md bg-slate-300 p-4 backdrop:bg-black/50"
       >
         {currentView}
       </dialog>
