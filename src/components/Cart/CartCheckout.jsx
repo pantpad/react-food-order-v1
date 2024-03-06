@@ -8,10 +8,12 @@ import { updateOrders } from "../../http";
 import Cart from "./Cart";
 import CartSuccess from "./CartSuccess";
 
-function createOrder(cart, formData, cartTotal) {
+function createOrder(cart, formDataValues, cartTotal) {
+  console.log("data");
+  console.log(formDataValues);
   return {
     items: [...cart],
-    customer: { ...formData },
+    customer: { ...formDataValues },
     timeStamp: Date.now(),
     cartTotal,
   };
@@ -19,17 +21,25 @@ function createOrder(cart, formData, cartTotal) {
 
 export default function CartCheckout() {
   const { cart, cartTotal, clearCart } = useContext(foodContext);
-  const { changeView, closeModal, formData, changeFormData, clearFormData } =
-    useContext(modalContext);
+  const {
+    changeView,
+    closeModal,
+    formData,
+    formDataValues,
+    changeFormData,
+    clearFormData,
+    onErrorShow,
+  } = useContext(modalContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState(null);
 
   return (
     <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          const order = createOrder(cart, formData, cartTotal);
-
+          const order = createOrder(cart, formDataValues, cartTotal);
+          console.log(order);
           //send put request -> if success show success .jsx else show alert
           async function postData() {
             try {
@@ -39,13 +49,13 @@ export default function CartCheckout() {
               clearFormData();
               changeView(<CartSuccess />);
             } catch (err) {
-              alert(err);
+              setFormError(err);
             } finally {
               setIsSubmitting(false);
             }
           }
 
-          postData();
+          //postData();
         }}
       >
         <section>
@@ -59,10 +69,14 @@ export default function CartCheckout() {
               type="text"
               name="fullName"
               required
-              value={formData.fullName}
+              value={formDataValues.fullName}
               onChange={changeFormData}
               autoFocus
+              onBlur={onErrorShow}
             />
+            {formData.fullName.showError && (
+              <p className="h-4 text-red-500">{formData.fullName.error}</p>
+            )}
           </div>
           <div>
             <label htmlFor="">Email</label>
@@ -70,9 +84,13 @@ export default function CartCheckout() {
               type="email"
               name="email"
               required
-              value={formData.email}
+              value={formDataValues.email}
               onChange={changeFormData}
+              onBlur={onErrorShow}
             />
+            {formData.email.showError && (
+              <p className="h-4 text-red-500">{formData.email.error}</p>
+            )}
           </div>
           <div>
             <label htmlFor="">Street</label>
@@ -80,9 +98,13 @@ export default function CartCheckout() {
               type="text"
               name="street"
               required
-              value={formData.street}
+              value={formDataValues.street}
               onChange={changeFormData}
+              onBlur={onErrorShow}
             />
+            {formData.street.showError && (
+              <p className="h-4 text-red-500">{formData.street.error}</p>
+            )}
           </div>
           <div>
             <label htmlFor="">Postal Code</label>
@@ -90,9 +112,15 @@ export default function CartCheckout() {
               type="text"
               name="postal-code"
               required
-              value={formData["postal-code"]}
+              value={formDataValues["postal-code"]}
               onChange={changeFormData}
+              onBlur={onErrorShow}
             />
+            {formData["postal-code"].showError && (
+              <p className="h-4 text-red-500">
+                {formData["postal-code"].error}
+              </p>
+            )}
           </div>
           <div>
             <label htmlFor="">City</label>
@@ -100,11 +128,16 @@ export default function CartCheckout() {
               type="text"
               name="city"
               required
-              value={formData.city}
+              value={formDataValues.city}
               onChange={changeFormData}
+              onBlur={onErrorShow}
             />
+            {formData.city.showError && (
+              <p className="h-4 text-red-500">{formData.city.error}</p>
+            )}
           </div>
         </section>
+
         <section className="mt-8 flex justify-end gap-2 [&_button]:rounded-md [&_button]:border [&_button]:border-black/25 [&_button]:p-2">
           <button
             type="button"
@@ -129,6 +162,11 @@ export default function CartCheckout() {
             {isSubmitting ? "Submitting..." : "Submit Order"}
           </button>
         </section>
+        {formError && (
+          <p className="mt-2 font-semibold text-red-500">
+            Error while sending data. . .
+          </p>
+        )}
       </form>
     </>
   );

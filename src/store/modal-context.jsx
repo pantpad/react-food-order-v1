@@ -1,14 +1,21 @@
 import { useState, createContext } from "react";
 
+function validate(value) {
+  if (value !== "") return "campo vuoto";
+  return null;
+}
+
 export const modalContext = createContext({
   isOpen: false,
   currentView: null,
   formData: {},
+  formDataValues: {},
   closeModal: () => {},
   openModal: () => {},
   changeView: () => {},
   changeFormData: () => {},
   clearFormData: () => {},
+  onErrorShow: () => {},
 });
 
 export default function ModalContextProvider({ children }) {
@@ -16,18 +23,35 @@ export default function ModalContextProvider({ children }) {
   const [currentView, setCurrentView] = useState(null);
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    street: "",
-    ["postal-code"]: "",
-    city: "",
+    fullName: { value: "", error: validate(), showError: false },
+    email: { value: "", error: validate(), showError: false },
+    street: { value: "", error: validate(), showError: false },
+    ["postal-code"]: { value: "", error: validate(), showError: false },
+    city: { value: "", error: validate(), showError: false },
   });
+
+  function returnFormDataValues() {
+    const formDataObj = {};
+    for (let prop in formData) {
+      formDataObj[prop] = formData[prop].value;
+    }
+    return formDataObj;
+  }
+
   function onFormDataChange(e) {
     const { value, name } = e.target;
     setFormData((prev) => {
-      return { ...prev, [name]: value };
+      return { ...prev, [name]: { ...prev[name], value: value } };
     });
   }
+
+  function onErrorShow(e) {
+    const { value, name } = e.target;
+    setFormData((prev) => {
+      return { ...prev, [name]: { ...prev[name], showError: true } };
+    });
+  }
+
   function clearFormData() {
     setFormData({});
   }
@@ -49,11 +73,13 @@ export default function ModalContextProvider({ children }) {
     isOpen: isOpen,
     currentView: currentView,
     formData: formData,
+    formDataValues: returnFormDataValues(),
     closeModal: closeModal,
     openModal: handleModalOpening,
     changeView: handleViewChange,
     changeFormData: onFormDataChange,
     clearFormData,
+    onErrorShow,
   };
 
   return (
