@@ -21,6 +21,7 @@ export default function CartCheckout() {
   const { cart, cartTotal, clearCart } = useContext(foodContext);
   const { changeView, closeModal, formData, changeFormData, clearFormData } =
     useContext(modalContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <>
@@ -32,12 +33,15 @@ export default function CartCheckout() {
           //send put request -> if success show success .jsx else show alert
           async function postData() {
             try {
+              setIsSubmitting(true);
               await updateOrders(order);
               clearCart();
               clearFormData();
               changeView(<CartSuccess />);
             } catch (err) {
               alert(err);
+            } finally {
+              setIsSubmitting(false);
             }
           }
 
@@ -116,12 +120,13 @@ export default function CartCheckout() {
           </button>
           <button
             type="submit"
-            className="bg-amber-300"
+            className={`${isSubmitting ? "bg-amber-300/50" : "bg-amber-300"}`}
             onClick={() => {
               console.log("submit order");
             }}
+            disabled={isSubmitting}
           >
-            Submit Order
+            {isSubmitting ? "Submitting..." : "Submit Order"}
           </button>
         </section>
       </form>
