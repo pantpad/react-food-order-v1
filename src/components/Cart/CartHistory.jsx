@@ -76,16 +76,26 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
           </summary>
           <section className="rounded-b-md border border-t-0 border-black/35 bg-slate-500/50 p-4">
             {items.map((item) => (
-              <>
-                <p key={item.id}>
-                  Name: {}, {item.price}, {item.quantity}-
-                  {item.price * item.quantity},{" "}
-                </p>
-              </>
+              <ItemDetails key={item.id} {...item} />
             ))}
           </section>
         </details>
       </article>
+    </>
+  );
+}
+
+function ItemDetails({ name, price, quantity }) {
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-4">
+        <p>
+          {name} - ${price}
+        </p>
+        <p className="w-[100px] justify-self-end">
+          {quantity} - ${price * quantity}
+        </p>
+      </div>
     </>
   );
 }
