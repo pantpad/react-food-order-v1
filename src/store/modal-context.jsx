@@ -1,7 +1,17 @@
 import { useState, createContext } from "react";
 
-function validate(value) {
-  if (value !== "") return "campo vuoto";
+function nameValidation(value) {
+  return value;
+}
+
+let validateMap = {
+  fullName: (v) => {
+    return nameValidation(v);
+  },
+};
+
+function validate(key, value) {
+  if (value !== "") return "Field is empty";
   return null;
 }
 
@@ -30,6 +40,8 @@ export default function ModalContextProvider({ children }) {
     city: { value: "", error: validate(), showError: false },
   });
 
+  console.log(formData);
+
   function returnFormDataValues() {
     const formDataObj = {};
     for (let prop in formData) {
@@ -41,12 +53,19 @@ export default function ModalContextProvider({ children }) {
   function onFormDataChange(e) {
     const { value, name } = e.target;
     setFormData((prev) => {
-      return { ...prev, [name]: { ...prev[name], value: value } };
+      return {
+        ...prev,
+        [name]: {
+          ...prev[name],
+          value: value,
+          error: validateMap[name](value),
+        },
+      };
     });
   }
 
   function onErrorShow(e) {
-    const { value, name } = e.target;
+    const { name } = e.target;
     setFormData((prev) => {
       return { ...prev, [name]: { ...prev[name], showError: true } };
     });
