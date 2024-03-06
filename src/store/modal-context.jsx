@@ -1,54 +1,6 @@
 import { useState, createContext } from "react";
 
-function nameValidation(value) {
-  // Regular expression to match only letters and spaces
-  const onlyLettersAndSpaces = /^[a-zA-Z\s]+$/;
-
-  // Test the input against the regular expression
-  if (!onlyLettersAndSpaces.test(value))
-    return "Field should contain only letters and spaces";
-
-  if (value.length > 24) return "Field should be maximum 24 chars long";
-
-  return null;
-}
-
-function emailValidation(value) {
-  const basicPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  if (!value.includes("@")) {
-    return "This field doesn't contain the @ symbol";
-  }
-
-  if (!basicPattern.test(value)) {
-    return "This email is not valid!";
-  }
-
-  return null;
-}
-
-let validateMap = {
-  fullName: (v) => {
-    return nameValidation(v);
-  },
-  email: (v) => {
-    return emailValidation(v);
-  },
-  street: (v) => {
-    return nameValidation(v);
-  },
-  ["postal-code"]: (v) => {
-    return nameValidation(v);
-  },
-  city: (v) => {
-    return nameValidation(v);
-  },
-};
-
-function validate(key, value) {
-  if (value === "") return "Field is empty";
-  return null;
-}
+import { validateMap } from "../utils/fieldValidation";
 
 export const modalContext = createContext({
   isOpen: false,
@@ -68,11 +20,11 @@ export default function ModalContextProvider({ children }) {
   const [currentView, setCurrentView] = useState(null);
 
   const [formData, setFormData] = useState({
-    fullName: { value: "", error: validate(), showError: false },
-    email: { value: "", error: validate(), showError: false },
-    street: { value: "", error: validate(), showError: false },
-    ["postal-code"]: { value: "", error: validate(), showError: false },
-    city: { value: "", error: validate(), showError: false },
+    fullName: { value: "", error: "", showError: false },
+    email: { value: "", error: "", showError: false },
+    street: { value: "", error: "", showError: false },
+    ["postal-code"]: { value: "", error: "", showError: false },
+    city: { value: "", error: "", showError: false },
   });
 
   console.log(formData);
@@ -93,7 +45,7 @@ export default function ModalContextProvider({ children }) {
         [name]: {
           ...prev[name],
           value: value,
-          error: validateMap[name](value),
+          error: value !== "" ? validateMap[name](value) : "Field is Empty",
         },
       };
     });

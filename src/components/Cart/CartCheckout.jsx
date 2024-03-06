@@ -9,8 +9,6 @@ import Cart from "./Cart";
 import CartSuccess from "./CartSuccess";
 
 function createOrder(cart, formDataValues, cartTotal) {
-  console.log("data");
-  console.log(formDataValues);
   return {
     items: [...cart],
     customer: { ...formDataValues },
@@ -62,7 +60,7 @@ export default function CartCheckout() {
           <h1>Checkout</h1>
           <p>Total Amount: ${cartTotal}</p>
         </section>
-        <section className="mt-4 flex flex-col justify-start gap-4 [&_div]:flex [&_div]:flex-col [&_div]:gap-1">
+        <section className="mt-4 flex flex-col justify-start [&_div]:flex [&_div]:flex-col [&_div]:gap-1">
           <div>
             <label htmlFor="">Full Name</label>
             <input
@@ -74,7 +72,7 @@ export default function CartCheckout() {
               autoFocus
               onBlur={onErrorShow}
             />
-            <p className="h-4 text-sm text-red-500">
+            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
               {formData.fullName.error &&
                 formData.fullName.showError &&
                 formData.fullName.error}
@@ -90,7 +88,7 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            <p className="h-4 text-sm text-red-500">
+            <p className="mb-2 mt-1  h-4 text-sm text-red-500">
               {formData.email.error &&
                 formData.email.showError &&
                 formData.email.error}
@@ -106,7 +104,7 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            <p className="h-4 text-sm text-red-500">
+            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
               {formData.street.error &&
                 formData.street.showError &&
                 formData.street.error}
@@ -122,7 +120,7 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            <p className="h-4 text-sm text-red-500">
+            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
               {formData["postal-code"].error &&
                 formData["postal-code"].showError &&
                 formData["postal-code"].error}
@@ -138,7 +136,7 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            <p className="h-4 text-sm text-red-500">
+            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
               {formData.city.error &&
                 formData.city.showError &&
                 formData.city.error}
