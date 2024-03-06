@@ -1,17 +1,52 @@
 import { useState, createContext } from "react";
 
 function nameValidation(value) {
-  return value;
+  // Regular expression to match only letters and spaces
+  const onlyLettersAndSpaces = /^[a-zA-Z\s]+$/;
+
+  // Test the input against the regular expression
+  if (!onlyLettersAndSpaces.test(value))
+    return "Field should contain only letters and spaces";
+
+  if (value.length > 24) return "Field should be maximum 24 chars long";
+
+  return null;
+}
+
+function emailValidation(value) {
+  const basicPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  if (!value.includes("@")) {
+    return "This field doesn't contain the @ symbol";
+  }
+
+  if (!basicPattern.test(value)) {
+    return "This email is not valid!";
+  }
+
+  return null;
 }
 
 let validateMap = {
   fullName: (v) => {
     return nameValidation(v);
   },
+  email: (v) => {
+    return emailValidation(v);
+  },
+  street: (v) => {
+    return nameValidation(v);
+  },
+  ["postal-code"]: (v) => {
+    return nameValidation(v);
+  },
+  city: (v) => {
+    return nameValidation(v);
+  },
 };
 
 function validate(key, value) {
-  if (value !== "") return "Field is empty";
+  if (value === "") return "Field is empty";
   return null;
 }
 

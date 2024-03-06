@@ -74,9 +74,11 @@ export default function CartCheckout() {
               autoFocus
               onBlur={onErrorShow}
             />
-            {formData.fullName.showError && (
-              <p className="h-4 text-red-500">{formData.fullName.error}</p>
-            )}
+            <p className="h-4 text-sm text-red-500">
+              {formData.fullName.error &&
+                formData.fullName.showError &&
+                formData.fullName.error}
+            </p>
           </div>
           <div>
             <label htmlFor="">Email</label>
@@ -88,9 +90,11 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            {formData.email.showError && (
-              <p className="h-4 text-red-500">{formData.email.error}</p>
-            )}
+            <p className="h-4 text-sm text-red-500">
+              {formData.email.error &&
+                formData.email.showError &&
+                formData.email.error}
+            </p>
           </div>
           <div>
             <label htmlFor="">Street</label>
@@ -102,9 +106,11 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            {formData.street.showError && (
-              <p className="h-4 text-red-500">{formData.street.error}</p>
-            )}
+            <p className="h-4 text-sm text-red-500">
+              {formData.street.error &&
+                formData.street.showError &&
+                formData.street.error}
+            </p>
           </div>
           <div>
             <label htmlFor="">Postal Code</label>
@@ -116,11 +122,11 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            {formData["postal-code"].showError && (
-              <p className="h-4 text-red-500">
-                {formData["postal-code"].error}
-              </p>
-            )}
+            <p className="h-4 text-sm text-red-500">
+              {formData["postal-code"].error &&
+                formData["postal-code"].showError &&
+                formData["postal-code"].error}
+            </p>
           </div>
           <div>
             <label htmlFor="">City</label>
@@ -132,9 +138,11 @@ export default function CartCheckout() {
               onChange={changeFormData}
               onBlur={onErrorShow}
             />
-            {formData.city.showError && (
-              <p className="h-4 text-red-500">{formData.city.error}</p>
-            )}
+            <p className="h-4 text-sm text-red-500">
+              {formData.city.error &&
+                formData.city.showError &&
+                formData.city.error}
+            </p>
           </div>
         </section>
 
