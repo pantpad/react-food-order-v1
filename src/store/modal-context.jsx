@@ -3,14 +3,34 @@ import { useState, createContext } from "react";
 export const modalContext = createContext({
   isOpen: false,
   currentView: null,
+  formData: {},
   closeModal: () => {},
   openModal: () => {},
   changeView: () => {},
+  changeFormData: () => {},
+  clearFormData: () => {},
 });
 
 export default function ModalContextProvider({ children }) {
   const [isOpen, setIsOpen] = useState(null);
   const [currentView, setCurrentView] = useState(null);
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    street: "",
+    ["postal-code"]: "",
+    city: "",
+  });
+  function onFormDataChange(e) {
+    const { value, name } = e.target;
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+  }
+  function clearFormData() {
+    setFormData({});
+  }
 
   function handleModalOpening(view) {
     setIsOpen(true);
@@ -28,9 +48,12 @@ export default function ModalContextProvider({ children }) {
   const modalCtx = {
     isOpen: isOpen,
     currentView: currentView,
+    formData: formData,
     closeModal: closeModal,
     openModal: handleModalOpening,
     changeView: handleViewChange,
+    changeFormData: onFormDataChange,
+    clearFormData,
   };
 
   return (

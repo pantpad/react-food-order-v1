@@ -47,8 +47,8 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
   return (
     <>
       <article className="relative">
-        <details className="group mb-2 rounded-md [&_summary]:open:rounded-b-none">
-          <summary className="flex cursor-pointer flex-wrap  justify-between gap-8 rounded-md border border-black/35 bg-slate-500/90 p-4 text-sm text-white transition-all">
+        <details className="group mb-2 rounded-md [&>section]:open:animate-[fade-in_0.3s_ease-out_none] [&_summary]:open:rounded-b-none">
+          <summary className="flex cursor-pointer flex-wrap  justify-between gap-8 rounded-md border border-black/35 bg-slate-500/90 p-4 text-sm text-white">
             <section className="flex justify-between gap-2 text-left">
               <div className="flex flex-col">
                 <label>Order done on:</label>
@@ -74,7 +74,7 @@ function OrderItem({ id, customer, items, timeStamp, cartTotal }) {
               </div>
             </section>
           </summary>
-          <section className="rounded-b-md border border-t-0 border-black/35 bg-slate-500/50 p-4 group-open:animate-[fade-in_0.3s_ease-out_forwards]">
+          <section className="rounded-b-md border border-t-0 border-black/35 bg-slate-500/50 p-4">
             {items.map((item) => (
               <ItemDetails key={item.id} {...item} />
             ))}

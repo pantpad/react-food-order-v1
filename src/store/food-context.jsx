@@ -42,7 +42,7 @@ export default function FoodContextProvider({ children }) {
     let total = cart.reduce((acc, item) => {
       return acc + item.price * item.quantity;
     }, 0);
-    return Math.round(total);
+    return total.toFixed(2);
   }
 
   function addItemToCart(meal) {
