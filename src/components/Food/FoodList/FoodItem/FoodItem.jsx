@@ -10,19 +10,21 @@ export default function FoodItem({
 
   return (
     <>
-      <article className="bg-black/30">
-        <div>
+      <article className="rounded-xl bg-black/30">
+        <div className="flex h-full flex-col justify-start">
           <img
             src={`../../../../../backend/public/${image}`}
             alt={name}
-            className="w-full"
+            className="w-full rounded-xl"
           />
-          <h1>{name}</h1>
-          <button>${price}</button>
-          <p>{description}</p>
-          <button className="button" onClick={onAdd}>
-            Add to Cart
-          </button>
+          <div className="flex h-full flex-col justify-between p-4">
+            <h1 className="text-xl">{name}</h1>
+            <button>${price}</button>
+            <p className="text-pretty">{description}</p>
+            <button className="button" onClick={onAdd}>
+              Add to Cart
+            </button>
+          </div>
         </div>
       </article>
     </>
