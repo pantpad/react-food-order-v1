@@ -18,7 +18,6 @@ export default function CartHistory() {
     );
 
   //console.log("CartHistory");
-  console.log(orders);
   return (
     <>
       <h1>History</h1>

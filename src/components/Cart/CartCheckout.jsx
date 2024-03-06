@@ -24,24 +24,19 @@ export default function CartCheckout() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          //send put request -> if success show success .jsx else show error.jsx
+          //send put request -> if success show success .jsx else show alert
           const formData = new FormData(e.target);
           const data = Object.fromEntries(formData);
 
           const order = createOrder(cart, data);
-          console.log(order);
 
           async function postData() {
             try {
               await updateOrders(order);
-              console.log("success");
               clearCart();
               changeView(<CartSuccess />);
             } catch (err) {
-              console.log(err);
               alert(err);
-            } finally {
-              console.log("finito");
             }
           }
 
