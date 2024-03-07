@@ -53,7 +53,7 @@ export default function CartCheckout() {
             }
           }
 
-          //postData();
+          postData();
         }}
       >
         <section>

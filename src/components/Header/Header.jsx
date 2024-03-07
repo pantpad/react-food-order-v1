@@ -22,10 +22,12 @@ export default function Header() {
             width={64}
             className="rounded-full border-2 border-white/35"
           />
-          <h2>REACT-FOOD</h2>
+          <h2 className="text-2xl font-semibold tracking-[0.2em] text-[#ffc404]">
+            REACTFOOD
+          </h2>
         </section>
-        <nav>
-          <ul className="flex gap-4 [&>*]:cursor-pointer">
+        <nav className="text-[#ffc404]">
+          <ul className="flex gap-4 font-semibold uppercase [&>*]:cursor-pointer">
             <li
               onClick={() => {
                 openModal(<CartHistory />);
