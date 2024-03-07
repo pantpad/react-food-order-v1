@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import NavLinks from "./NavLinks";
 
-export default function Nav() {
+export default function NavAnimated() {
   const [openNav, setOpenNav] = useState(false);
 
   function toggleNavBar() {
@@ -24,7 +24,7 @@ export default function Nav() {
       {openNav && (
         <NavLinks
           className={
-            "flex basis-full flex-col items-center gap-2 font-semibold uppercase text-[#ffc404] md:hidden [&>*]:cursor-pointer"
+            "flex basis-full animate-[fade-in-flex_0.3s_linear] flex-col items-center gap-2 font-semibold uppercase text-[#ffc404] md:hidden [&>*]:cursor-pointer"
           }
         />
       )}

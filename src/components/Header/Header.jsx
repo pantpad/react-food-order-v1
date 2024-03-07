@@ -1,4 +1,5 @@
 import Nav from "./Nav";
+import NavAnimated from "./NavAnimated";
 
 export default function Header() {
   //console.log("Header");
@@ -18,7 +19,7 @@ export default function Header() {
             REACTFOOD
           </h2>
         </section>
-        <Nav />
+        <NavAnimated />
       </header>
     </>
   );

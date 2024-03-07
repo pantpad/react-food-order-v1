@@ -12,6 +12,14 @@ export default {
           "0%": { opacity: 1, display: "block" },
           "100%": { opacity: 0, display: "none" },
         },
+        "fade-in-flex": {
+          "0%": { opacity: 0, display: "none" },
+          "100%": { opacity: 1, display: "flex" },
+        },
+        "fade-out-flex": {
+          "0%": { opacity: 1, display: "flex" },
+          "100%": { opacity: 0, display: "none" },
+        },
       },
     },
   },
