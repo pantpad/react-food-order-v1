@@ -1,11 +1,4 @@
-export default function FoodItem({
-  id,
-  name,
-  price,
-  description,
-  image,
-  onAdd,
-}) {
+export default function FoodItem({ name, price, description, image, onAdd }) {
   //console.log("FoodItem");
 
   return (
@@ -15,12 +8,12 @@ export default function FoodItem({
           <img
             src={`../../../../../backend/public/${image}`}
             alt={name}
-            className="w-full rounded-xl"
+            className="w-full rounded-xl rounded-b-none"
           />
           <div className="flex h-full flex-col justify-between p-4">
             <h1 className="text-xl">{name}</h1>
             <button>${price}</button>
-            <p className="text-pretty">{description}</p>
+            <p className="mb-4 text-pretty">{description}</p>
             <button className="button" onClick={onAdd}>
               Add to Cart
             </button>
