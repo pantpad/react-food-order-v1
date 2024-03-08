@@ -5,12 +5,13 @@ import { useContext } from "react";
 import { foodContext } from "../../../store/food-context";
 
 import FoodItem from "./FoodItem/FoodItem";
+import FoodItemSkeleton from "./FoodItem/FoodItemSkeleton";
 
 export default function FoodList() {
   const { addItemToCart } = useContext(foodContext);
   const { data: meals, error, isFetching } = useFetch(fetchMeals, []);
 
-  if (isFetching) return <p>Loading data . . .</p>;
+  let skeletonSection = <>{Array(10).fill(<FoodItemSkeleton />)}</>;
 
   if (error) return <p>{error.message} meals</p>;
 
@@ -21,9 +22,15 @@ export default function FoodList() {
         id="food-list"
         className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4"
       >
-        {meals.map((meal) => (
-          <FoodItem key={meal.id} {...meal} onAdd={() => addItemToCart(meal)} />
-        ))}
+        {isFetching
+          ? skeletonSection
+          : meals.map((meal) => (
+              <FoodItem
+                key={meal.id}
+                {...meal}
+                onAdd={() => addItemToCart(meal)}
+              />
+            ))}
       </section>
     </>
   );

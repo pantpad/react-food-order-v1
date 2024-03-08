@@ -14,7 +14,7 @@ export default function CartHistory() {
     return (
       <>
         <h1>History</h1>
-        <p>Loading data . . .</p>;
+        <p>Loading data . . .</p>
       </>
     );
 
