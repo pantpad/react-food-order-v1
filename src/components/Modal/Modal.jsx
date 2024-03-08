@@ -13,8 +13,7 @@ export default function Modal() {
       dialog.current.close();
     }
   }, [isOpen]);
-  //console.log("Modal");
-
+  console.log("Modal");
   return createPortal(
     <>
       <dialog

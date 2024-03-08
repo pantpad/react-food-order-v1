@@ -17,15 +17,6 @@ export default function FoodContextProvider({ children }) {
   //const [meals, setMeals] = useState([]);
   //const [orders, setOrders] = useState([]);
 
-  function createCartItem(meal) {
-    return {
-      id: meal.id,
-      name: meal.name,
-      price: meal.price,
-      quantity: 1,
-    };
-  }
-
   function findItemIndex(lookUpID) {
     const itemIndex = cart.findIndex((item) => item.id === lookUpID);
     return itemIndex;
@@ -45,9 +36,9 @@ export default function FoodContextProvider({ children }) {
     return total.toFixed(2);
   }
 
-  function addItemToCart(meal) {
+  function addItemToCart(id, name, price) {
     //cerco se meal esiste dentro cart
-    const itemIndex = findItemIndex(meal.id);
+    const itemIndex = findItemIndex(id);
     if (itemIndex > -1) {
       //prendo meal, lo copio e aggiorno la quantita'
       const mealToUpdate = {
@@ -62,7 +53,7 @@ export default function FoodContextProvider({ children }) {
       setCart(updatedMeals);
     } else {
       //creo nuovo item, lo aggiungo in coda
-      const cartItem = createCartItem(meal);
+      const cartItem = { id: id, name: name, price: price, quantity: 1 };
       setCart((prev) => [...prev, cartItem]);
     }
   }

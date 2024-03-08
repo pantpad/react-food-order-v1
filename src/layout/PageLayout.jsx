@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 export default function PageLayout({ className, children }) {
+  console.log("pagelayout");
   return (
     <>
       <main
@@ -11,5 +12,3 @@ export default function PageLayout({ className, children }) {
     </>
   );
 }
-
-//

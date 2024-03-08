@@ -1,7 +1,7 @@
 import { useFetch } from "../../../hooks/useFetch";
 import { fetchMeals } from "../../../http";
 
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { foodContext } from "../../../store/food-context";
 
 import FoodItem from "./FoodItem/FoodItem";
@@ -17,7 +17,7 @@ export default function FoodList() {
 
   if (error) return <p>{error.message} meals</p>;
 
-  //console.log("FoodList");
+  console.log("FoodList");
   return (
     <>
       <section
@@ -27,11 +27,7 @@ export default function FoodList() {
         {isFetching
           ? skeletonSection
           : meals.map((meal) => (
-              <FoodItem
-                key={meal.id}
-                {...meal}
-                onAdd={() => addItemToCart(meal)}
-              />
+              <FoodItem key={meal.id} {...meal} onAdd={addItemToCart} />
             ))}
       </section>
     </>

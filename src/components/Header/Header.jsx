@@ -2,7 +2,7 @@ import Nav from "./Nav";
 import NavAnimated from "./NavAnimated";
 
 export default function Header() {
-  //console.log("Header");
+  console.log("Header");
   return (
     <>
       <header className="sticky top-0 flex w-full flex-wrap items-center justify-between border-b border-white/35 bg-gradient-to-r from-[#29251c] to-[#29251c] px-8 py-4 max-sm:px-4 max-[400px]:justify-center">

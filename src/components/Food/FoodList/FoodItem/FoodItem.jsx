@@ -1,6 +1,14 @@
-export default function FoodItem({ name, price, description, image, onAdd }) {
-  //console.log("FoodItem");
+import { memo } from "react";
 
+const FoodItem = memo(function FoodItem({
+  id,
+  name,
+  price,
+  description,
+  image,
+  onAdd,
+}) {
+  console.log("FoodItem " + name);
   return (
     <>
       <article className="rounded-xl bg-black/30">
@@ -14,7 +22,7 @@ export default function FoodItem({ name, price, description, image, onAdd }) {
             <h1 className="text-xl">{name}</h1>
             <button>${price}</button>
             <p className="mb-4 text-pretty">{description}</p>
-            <button className="button" onClick={onAdd}>
+            <button className="button" onClick={() => onAdd(id, name, price)}>
               Add to Cart
             </button>
           </div>
@@ -22,4 +30,6 @@ export default function FoodItem({ name, price, description, image, onAdd }) {
       </article>
     </>
   );
-}
+});
+
+export default FoodItem;
