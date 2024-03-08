@@ -27,8 +27,6 @@ export default function ModalContextProvider({ children }) {
     city: { value: "", error: "", showError: false },
   });
 
-  console.log(formData);
-
   function returnFormDataValues() {
     const formDataObj = {};
     for (let prop in formData) {

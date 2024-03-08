@@ -11,7 +11,9 @@ export default function FoodList() {
   const { addItemToCart } = useContext(foodContext);
   const { data: meals, error, isFetching } = useFetch(fetchMeals, []);
 
-  let skeletonSection = <>{Array(10).fill(<FoodItemSkeleton />)}</>;
+  let skeletonSection = Array.from(Array(10), (_, i) => (
+    <FoodItemSkeleton key={i} />
+  ));
 
   if (error) return <p>{error.message} meals</p>;
 

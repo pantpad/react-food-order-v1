@@ -37,7 +37,6 @@ export default function CartCheckout() {
         onSubmit={(e) => {
           e.preventDefault();
           const order = createOrder(cart, formDataValues, cartTotal);
-          console.log(order);
           //send put request -> if success show success .jsx else show alert
           async function postData() {
             try {
@@ -160,9 +159,6 @@ export default function CartCheckout() {
           <button
             type="submit"
             className={`${isSubmitting ? "bg-amber-300/50" : "bg-amber-300"}`}
-            onClick={() => {
-              console.log("submit order");
-            }}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Submitting..." : "Submit Order"}

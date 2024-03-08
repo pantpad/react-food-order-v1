@@ -7,7 +7,7 @@ import FoodContextProvider from "./store/food-context";
 import ModalContextProvider from "./store/modal-context";
 
 function App() {
-  //console.log("App");
+  console.log("App");
   return (
     <FoodContextProvider>
       <ModalContextProvider>
