@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useMemo, useCallback } from "react";
 
 export const foodContext = createContext({
   cart: [],
@@ -14,13 +14,14 @@ export const foodContext = createContext({
 
 export default function FoodContextProvider({ children }) {
   const [cart, setCart] = useState([]);
-  //const [meals, setMeals] = useState([]);
-  //const [orders, setOrders] = useState([]);
 
-  function findItemIndex(lookUpID) {
-    const itemIndex = cart.findIndex((item) => item.id === lookUpID);
-    return itemIndex;
-  }
+  const findItemIndex = useCallback(
+    function findItemIndex(lookUpID) {
+      const itemIndex = cart.findIndex((item) => item.id === lookUpID);
+      return itemIndex;
+    },
+    [cart],
+  );
 
   function getCartLength() {
     let length = cart.reduce((acc, item) => {
@@ -36,27 +37,30 @@ export default function FoodContextProvider({ children }) {
     return total.toFixed(2);
   }
 
-  function addItemToCart(id, name, price) {
-    //cerco se meal esiste dentro cart
-    const itemIndex = findItemIndex(id);
-    if (itemIndex > -1) {
-      //prendo meal, lo copio e aggiorno la quantita'
-      const mealToUpdate = {
-        ...cart[itemIndex],
-        quantity: cart[itemIndex].quantity + 1,
-      };
-      //copio tutto il carrello, sostituisco il meal esistente
-      const updatedMeals = [...cart];
-      updatedMeals[itemIndex] = mealToUpdate;
+  const addItemToCart = useCallback(
+    function addItemToCart(id, name, price) {
+      //cerco se meal esiste dentro cart
+      const itemIndex = findItemIndex(id);
+      if (itemIndex > -1) {
+        //prendo meal, lo copio e aggiorno la quantita'
+        const mealToUpdate = {
+          ...cart[itemIndex],
+          quantity: cart[itemIndex].quantity + 1,
+        };
+        //copio tutto il carrello, sostituisco il meal esistente
+        const updatedMeals = [...cart];
+        updatedMeals[itemIndex] = mealToUpdate;
 
-      //aggiorno il carrello
-      setCart(updatedMeals);
-    } else {
-      //creo nuovo item, lo aggiungo in coda
-      const cartItem = { id: id, name: name, price: price, quantity: 1 };
-      setCart((prev) => [...prev, cartItem]);
-    }
-  }
+        //aggiorno il carrello
+        setCart(updatedMeals);
+      } else {
+        //creo nuovo item, lo aggiungo in coda
+        const cartItem = { id: id, name: name, price: price, quantity: 1 };
+        setCart((prev) => [...prev, cartItem]);
+      }
+    },
+    [cart],
+  );
 
   function increaseItemQuantity(meal) {
     const itemIndex = findItemIndex(meal.id);
@@ -91,7 +95,7 @@ export default function FoodContextProvider({ children }) {
 
   const foodCtx = {
     cart: cart,
-    addItemToCart: addItemToCart,
+    addItemToCart,
     isCartEmpty: cart.length < 1,
     cartLength: getCartLength(),
     cartTotal: getCartTotal(),

@@ -1,14 +1,12 @@
 import { useFetch } from "../../../hooks/useFetch";
 import { fetchMeals } from "../../../http";
 
-import { useCallback, useContext } from "react";
-import { foodContext } from "../../../store/food-context";
+import { memo } from "react";
 
 import FoodItem from "./FoodItem/FoodItem";
 import FoodItemSkeleton from "./FoodItem/FoodItemSkeleton";
 
-export default function FoodList() {
-  const { addItemToCart } = useContext(foodContext);
+export default memo(function FoodList() {
   const { data: meals, error, isFetching } = useFetch(fetchMeals, []);
 
   let skeletonSection = Array.from(Array(10), (_, i) => (
@@ -26,10 +24,8 @@ export default function FoodList() {
       >
         {isFetching
           ? skeletonSection
-          : meals.map((meal) => (
-              <FoodItem key={meal.id} {...meal} onAdd={addItemToCart} />
-            ))}
+          : meals.map((meal) => <FoodItem key={meal.id} {...meal} />)}
       </section>
     </>
   );
-}
+});

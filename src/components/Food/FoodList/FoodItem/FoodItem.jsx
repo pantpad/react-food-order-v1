@@ -1,14 +1,17 @@
 import { memo } from "react";
 
+import { useContext } from "react";
+import { foodContext } from "../../../../store/food-context";
+
 const FoodItem = memo(function FoodItem({
   id,
   name,
   price,
   description,
   image,
-  onAdd,
 }) {
   console.log("FoodItem " + name);
+  const { addItemToCart } = useContext(foodContext);
   return (
     <>
       <article className="rounded-xl bg-black/30">
@@ -22,7 +25,10 @@ const FoodItem = memo(function FoodItem({
             <h1 className="text-xl">{name}</h1>
             <button>${price}</button>
             <p className="mb-4 text-pretty">{description}</p>
-            <button className="button" onClick={() => onAdd(id, name, price)}>
+            <button
+              className="button"
+              onClick={() => addItemToCart(id, name, price)}
+            >
               Add to Cart
             </button>
           </div>
