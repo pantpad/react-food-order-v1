@@ -1,4 +1,4 @@
-import { useState, createContext, useMemo, useCallback } from "react";
+import { useState, createContext, useCallback } from "react";
 
 export const foodContext = createContext({
   cart: [],

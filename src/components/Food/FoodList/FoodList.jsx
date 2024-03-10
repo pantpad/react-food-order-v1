@@ -25,6 +25,7 @@ export default memo(function FoodList() {
         {isFetching
           ? skeletonSection
           : meals.map((meal) => <FoodItem key={meal.id} {...meal} />)}
+        //children
       </section>
     </>
   );

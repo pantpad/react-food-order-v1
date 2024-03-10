@@ -173,3 +173,31 @@ export default function CartCheckout() {
     </>
   );
 }
+
+//componente custom per input evitando che si resetti il form ogni volta
+
+{
+  /* <>div label input </> */
+}
+/*
+
+<div>
+  <label htmlFor="">Full Name</label>
+  <input
+    type="text"
+    name="fullName"
+    required
+    value={formDataValues.fullName}
+    onChange={changeFormData}
+    autoFocus
+    onBlur={onErrorShow}
+    
+  />
+  <p className="mb-2 mt-1 h-4 text-sm text-red-500">
+    {formData.fullName.error &&
+      formData.fullName.showError &&
+      formData.fullName.error}
+  </p>
+</div>
+
+*/
