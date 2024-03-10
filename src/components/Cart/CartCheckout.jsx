@@ -7,6 +7,7 @@ import { updateOrders } from "../../http";
 
 import Cart from "./Cart";
 import CartSuccess from "./CartSuccess";
+import CartInput from "./CartInput";
 
 function createOrder(cart, formDataValues, cartTotal) {
   return {
@@ -19,15 +20,8 @@ function createOrder(cart, formDataValues, cartTotal) {
 
 export default function CartCheckout() {
   const { cart, cartTotal, clearCart } = useContext(foodContext);
-  const {
-    changeView,
-    closeModal,
-    formData,
-    formDataValues,
-    changeFormData,
-    clearFormData,
-    onErrorShow,
-  } = useContext(modalContext);
+  const { changeView, closeModal, formData, formDataValues, clearFormData } =
+    useContext(modalContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
 
@@ -60,87 +54,52 @@ export default function CartCheckout() {
           <p>Total Amount: ${cartTotal}</p>
         </section>
         <section className="mt-4 flex flex-col justify-start [&_div]:flex [&_div]:flex-col [&_div]:gap-1">
-          <div>
-            <label htmlFor="">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              required
-              value={formDataValues.fullName}
-              onChange={changeFormData}
-              autoFocus
-              onBlur={onErrorShow}
-            />
-            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
-              {formData.fullName.error &&
-                formData.fullName.showError &&
-                formData.fullName.error}
-            </p>
-          </div>
-          <div>
-            <label htmlFor="">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formDataValues.email}
-              onChange={changeFormData}
-              onBlur={onErrorShow}
-            />
-            <p className="mb-2 mt-1  h-4 text-sm text-red-500">
-              {formData.email.error &&
-                formData.email.showError &&
-                formData.email.error}
-            </p>
-          </div>
-          <div>
-            <label htmlFor="">Street</label>
-            <input
-              type="text"
-              name="street"
-              required
-              value={formDataValues.street}
-              onChange={changeFormData}
-              onBlur={onErrorShow}
-            />
-            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
-              {formData.street.error &&
-                formData.street.showError &&
-                formData.street.error}
-            </p>
-          </div>
-          <div>
-            <label htmlFor="">Postal Code</label>
-            <input
-              type="text"
-              name="postal-code"
-              required
-              value={formDataValues["postal-code"]}
-              onChange={changeFormData}
-              onBlur={onErrorShow}
-            />
-            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
-              {formData["postal-code"].error &&
-                formData["postal-code"].showError &&
-                formData["postal-code"].error}
-            </p>
-          </div>
-          <div>
-            <label htmlFor="">City</label>
-            <input
-              type="text"
-              name="city"
-              required
-              value={formDataValues.city}
-              onChange={changeFormData}
-              onBlur={onErrorShow}
-            />
-            <p className="mb-2 mt-1 h-4 text-sm text-red-500">
-              {formData.city.error &&
-                formData.city.showError &&
-                formData.city.error}
-            </p>
-          </div>
+          <CartInput
+            label={"fullName"}
+            type="text"
+            data={formData.fullName}
+            value={formDataValues.fullName}
+            required
+          >
+            Full Name
+          </CartInput>
+          <CartInput
+            type="email"
+            label={"email"}
+            data={formData.email}
+            value={formDataValues.email}
+            required
+          >
+            Email
+          </CartInput>
+          <CartInput
+            type="text"
+            label={"street"}
+            data={formData.street}
+            value={formDataValues.street}
+            required
+          >
+            Street
+          </CartInput>
+
+          <CartInput
+            type="text"
+            label={"postal-code"}
+            data={formData["postal-code"]}
+            value={formDataValues["postal-code"]}
+            required
+          >
+            Postal Code
+          </CartInput>
+          <CartInput
+            type="text"
+            label={"city"}
+            data={formData.city}
+            value={formDataValues.city}
+            required
+          >
+            City
+          </CartInput>
         </section>
 
         <section className="mt-8 flex justify-end gap-2 [&_button]:rounded-md [&_button]:border [&_button]:border-black/25 [&_button]:p-2">
@@ -173,31 +132,3 @@ export default function CartCheckout() {
     </>
   );
 }
-
-//componente custom per input evitando che si resetti il form ogni volta
-
-{
-  /* <>div label input </> */
-}
-/*
-
-<div>
-  <label htmlFor="">Full Name</label>
-  <input
-    type="text"
-    name="fullName"
-    required
-    value={formDataValues.fullName}
-    onChange={changeFormData}
-    autoFocus
-    onBlur={onErrorShow}
-    
-  />
-  <p className="mb-2 mt-1 h-4 text-sm text-red-500">
-    {formData.fullName.error &&
-      formData.fullName.showError &&
-      formData.fullName.error}
-  </p>
-</div>
-
-*/

@@ -10,7 +10,6 @@ const FoodItem = memo(function FoodItem({
   image,
 }) {
   console.log("FoodItem " + name);
-
   return (
     <>
       <article className="rounded-xl bg-black/30">
